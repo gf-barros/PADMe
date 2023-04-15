@@ -5,6 +5,14 @@ __pycache__/
 # C extensions
 *.so
 
+# Data types
+*.csv
+*.h5
+*.hdf5
+*.zip
+*.xdmf
+*.xmf
+
 # Distribution / packaging
 .Python
 env/
