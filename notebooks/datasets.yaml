@@ -1,0 +1,16 @@
+raw_dataset_path: data/00_raw
+processed_dataset_path: data/01_processed
+output_dataset_path: data/02_dmd_output
+
+seird:
+  kaggle_path: "gfbarros/covid-19-spread-in-lombardy-italy"
+  kaggle_url: "https://kaggle.com/datasets/79eceaf4176927bbdbcbc2480ae15dff18fe72a25fb57c7de0bf7167c5680369"
+  zipfile_name: "covid-19-spread-in-lombardy-italy.zip"
+  folder_name: "covid-seird-lombardy-libmesh"
+
+sird:
+  kaggle_path: "gfbarros/covid-19-spread-in-lombardy-italy"
+  kaggle_url: "https://kaggle.com/datasets/79eceaf4176927bbdbcbc2480ae15dff18fe72a25fb57c7de0bf7167c5680369"
+  zipfile_name: "covid-19-spread-in-lombardy-italy.zip"
+  folder_name: "covid-sird-lombardy-freefem"
+

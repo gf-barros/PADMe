@@ -3,3 +3,4 @@
 from .models import *
 from .preprocessing import *
 from .visualization import *
+from .utils import *
