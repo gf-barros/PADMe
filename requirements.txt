@@ -13,3 +13,6 @@ meshio
 kaggle
 natsort
 pyyaml
+nbformat
+plotly
+seaborn

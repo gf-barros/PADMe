@@ -7,7 +7,7 @@ import logging
 import numpy as np
 
 logging.basicConfig(
-    level=logging.DEBUG, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
 logger = logging.getLogger(__name__)
 
@@ -93,7 +93,7 @@ class DMD:
             logger.info(
                 (
                     "Snapshots matrix rank is lesser than basis vectors chosen "
-                    f"as input. \nChanging dmd_parameters['basis_vectors'] to {rank_x1}." 
+                    f"as input. \nChanging dmd_parameters['basis_vectors'] to {rank_x1}."
                 )
             )
 
@@ -101,7 +101,7 @@ class DMD:
         self.snapshots_matrix = self.snapshots_matrix[
             :, self.lower_bound : self.upper_bound
         ]
-        
+
         return split_x1_matrix, split_x2_matrix
 
     def __randomized_svd(self, mat, basis_vectors, power_iterations, oversampling):
@@ -112,7 +112,9 @@ class DMD:
             z_projected_matrix = mat @ (mat.T @ z_projected_matrix)
         q_values, _ = np.linalg.qr(z_projected_matrix, mode="reduced")
         y_reduced_matrix = q_values.T @ mat
-        u_vectors_y, s_values, vt_vectors = np.linalg.svd(y_reduced_matrix, full_matrices=0)
+        u_vectors_y, s_values, vt_vectors = np.linalg.svd(
+            y_reduced_matrix, full_matrices=0
+        )
         u_vectors = q_values @ u_vectors_y
         return u_vectors, s_values, vt_vectors
 
