@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.graph_objects as go
+import plotly.offline as pyo
 import logging
 
 logging.basicConfig(
@@ -12,9 +13,58 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-class PostPlotDMD:
+class PostProcessingDMD:
     def __init__(self, dict_output):
         self.data = dict_output
+
+    def compute_temporal_l2_norm(self, visualization_library="matplotlib"):
+        snapshots_matrix = self.data["snapshots_matrix"]
+        dmd_approximation = self.data["dmd_matrix"]
+        t_vector = self.data["t"].squeeze()
+
+        # Compute the L2 norm between all the columns of the matrices
+        l2_norm = np.linalg.norm(snapshots_matrix - dmd_approximation, ord=2, axis=0)
+        l2_norm /= np.linalg.norm(snapshots_matrix, ord=2, axis=0)
+
+        if visualization_library == "matplotlib":
+            # Plot the L2 norm as a function of time
+            plt.plot(t_vector, l2_norm)
+
+            # Add axis labels and title
+            plt.xlabel("time")
+            plt.ylabel("relative error in time")
+            plt.title("L2 norm between snapshots_matrix and dmd_approximation")
+
+            # Display the plot
+            plt.show()
+
+        elif visualization_library == "seaborn":
+            # Plot the L2 norm as a function of time
+            sns.lineplot(x=t_vector, y=l2_norm)
+
+            # Add axis labels and title
+            plt.xlabel("time")
+            plt.ylabel("relative error in time")
+            plt.title("L2 norm between snapshots_matrix and dmd_approximation")
+
+            # Display the plot
+            plt.show()
+        elif visualization_library == "plotly":
+            # Create a Plotly figure
+            fig = go.Figure()
+
+            # Add a line trace for the L2 norm as a function of time
+            fig.add_trace(go.Scatter(x=t_vector, y=l2_norm, mode="lines"))
+
+            # Set the axis labels and title
+            fig.update_layout(
+                xaxis_title="time",
+                yaxis_title="relative error in time",
+                title="L2 norm between snapshots_matrix and dmd_approximation",
+            )
+
+            # Display the plot
+            pyo.iplot(fig)
 
     def plot_singular_values(self, visualization_library="matplotlib"):
         data = self.data["s"][:, np.newaxis]
@@ -80,6 +130,7 @@ class PostPlotDMD:
             # Setting axis limits to -1.5 and 1.5 to fit the unitary circle
             ax.set_xlim(-1.5, 1.5)
             ax.set_ylim(-1.5, 1.5)
+            plt.gca().set_aspect("equal", adjustable="box")
 
             # Displaying plot
             plt.show()
@@ -98,6 +149,7 @@ class PostPlotDMD:
             # Setting axis limits to -1.5 and 1.5 to fit the unitary circle
             plt.xlim(-1.5, 1.5)
             plt.ylim(-1.5, 1.5)
+            plt.gca().set_aspect("equal", adjustable="box")
 
             # Displaying plot
             plt.show()
@@ -123,9 +175,16 @@ class PostPlotDMD:
             fig.update_xaxes(range=[-1.5, 1.5])
             fig.update_yaxes(range=[-1.5, 1.5])
 
+            fig.update_yaxes(
+                scaleanchor="x",
+                scaleratio=1,
+            )
             # Displaying plot
             fig.show()
         else:
             logger.log(
                 "Invalid visualization library. Please choose 'matplotlib', 'seaborn' or 'plotly'"
             )
+
+    def export_to_vtk():
+        pass

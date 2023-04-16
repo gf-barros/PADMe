@@ -102,6 +102,7 @@ class DMD:
             :, self.lower_bound : self.upper_bound
         ]
 
+        self.dmd_approximation["snapshots_matrix"] = self.snapshots_matrix
         return split_x1_matrix, split_x2_matrix
 
     def __randomized_svd(self, mat, basis_vectors, power_iterations, oversampling):
@@ -181,6 +182,7 @@ class DMD:
             * self.parameters["dt_simulation"]
         )
         t_vector = t_vector[np.newaxis, :]
+        self.dmd_approximation["t"] = t_vector
         self.dmd_approximation["eigenvals_processed"] = eigenval
         eigenval = eigenval[:, np.newaxis]
         temp = np.multiply(eigenval, t_vector)
