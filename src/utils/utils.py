@@ -34,7 +34,7 @@ def generate_paths(example_dataset, root_dir, notebook_params):
 
 
 def download_dataset(filepaths, example_dataset, notebook_params, FORCE_DOWNLOAD=False):
-    if not os.path.isfile(filepaths["complete_filename"]) and FORCE_DOWNLOAD:
+    if not os.path.isfile(filepaths["complete_filename"]) or FORCE_DOWNLOAD:
         ipython = get_ipython()
         download_code = ipython.transform_cell(
             "! kaggle datasets download -d {notebook_params[example_dataset]['kaggle_path']}"
@@ -48,7 +48,7 @@ def download_dataset(filepaths, example_dataset, notebook_params, FORCE_DOWNLOAD
 
 
 def unpack_kaggle_dataset(filepaths):
-    if not os.path.exists(filepaths["complete_filepath"]):
+    if not os.path.exists(filepaths["snapshots_filepath"]):
         with zipfile.ZipFile(filepaths["complete_filename"], "r") as zip_ref:
             zip_ref.extractall(filepaths["complete_filepath"])
     return

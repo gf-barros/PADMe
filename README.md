@@ -1,10 +1,28 @@
-padme
-==============================
-Preprocessing Architecture for Dynamic Mode Decomposition
+PADMe
+------------
 
-A short description of the project.
 
-Project Organization
+**PADMe**: <ins>P</ins>reprocessing <ins>A</ins>rchitecture  for <ins>D</ins>inamic <ins>M</ins>ode D<ins>e</ins>composition
+
+## Table of contents
+- [PADMe](#padme)
+- [Table of contents](#table-of-contents)
+- [Description](#description)
+- [Project Organization](#project-organization)
+- [Dependencies and installation](#dependencies-and-installation)
+- [Documentation](#documentation)
+- [Testing](#testing)
+- [Examples and Tutorials](#examples-and-tutorials)
+- [Awards](#awards)
+- [How to cite](#how-to-cite)
+  - [References](#references)
+  - [Recent works with PyDMD](#recent-works-with-pydmd)
+- [License](#license)
+
+## Description
+TBD
+
+## Project Organization 
 ------------
 
     ├── LICENSE
@@ -52,7 +70,32 @@ Project Organization
     │
     └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
 
-
---------
-
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
+## Dependencies and installation
+**PyDMD** requires requires `numpy`, `scipy`, `matplotlib`, `future`, `sphinx` (for the documentation) and `pytest` (for local test). The code is tested for Python 3, while compatibility of Python 2 is not guaranteed anymore. It can be installed using `pip` or directly from the source code.
+
+## Documentation
+TBD
+
+
+## Testing
+TBD
+
+## Examples and Tutorials
+TBD
+
+## Awards
+TBD
+
+## How to cite
+TBD
+
+### References
+TBD
+
+### Recent works with PyDMD
+TBD
+
+## License
+
+See the [LICENSE](LICENSE.rst) file for license rights and limitations (MIT).

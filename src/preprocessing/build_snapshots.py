@@ -60,6 +60,7 @@ def read_h5_libmesh(filename, dataset):
     h5_file.close()
     return data_array
 
+
 def read_h5_fenics(filename, dataset="vector_0"):
     """
     Function used to read nodal values from H5 files.
@@ -80,8 +81,8 @@ def read_h5_fenics(filename, dataset="vector_0"):
     for key in h5_file.keys():
         group = f[key]
         for key in group.keys():
-            data = group[("vector_0")]
-    data_array = np.array(data, copy=True) 
+            data = group[(dataset)]
+    data_array = np.array(data, copy=True)
     h5_file.close()
     return data_array
 
@@ -93,11 +94,11 @@ def snapshots_assembly(file_type_str, snapshot_ingestion_parameters):
     Parameters
     ----------
     file_type_str : str
-        String describing the simulations output files type. 
+        String describing the simulations output files type.
         Possible inputs:
             - h5_libmesh: libMesh/EdgeCFD HDF5 files.
             - h5_fenics: FEniCS HDF5 files.
-            - vtk_freefem: freefem++ ASCII VTK files. 
+            - vtk_freefem: freefem++ ASCII VTK files.
     snapshot_ingestion_parameters : dict
         Dictionary containing the information regarding the files.
         Keys:
