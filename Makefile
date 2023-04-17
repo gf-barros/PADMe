@@ -76,6 +76,10 @@ endif
 test_environment:
 	$(PYTHON_INTERPRETER) test_environment.py
 
+env_to_kernel:
+	python3 -m ipykernel install --user --name $(PROJECT_NAME) --display-name $(PROJECT_NAME)
+
+
 #################################################################################
 # PROJECT RULES                                                                 #
 #################################################################################
